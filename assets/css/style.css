@@ -1,0 +1,468 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1,
+h2,
+h3 {
+    color: #3b5539;
+    margin: 20px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ベース */
+/body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Serif JP", serif;
+    background-color: #fff;
+    font-family: "Noto Serif JP", serif;
+    background-color: #faf8f2;
+    background-image: url('background-img-01.jpeg'); /* 画像ファイルのパス */
+    background-size: cover;                /*画面いっぱいに広げる */
+    background-position: center center;    /*真ん中に表示 */
+    background-repeat: no-repeat;          /*繰り返さない */
+    background-attachment: fixed;         /*スクロールしても固定 */
+    color: #1c1c1c;
+    line-height: 1.6;
+}*/
+background-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3); 半透明の黒（必要に応じて色変更） */
+    z-index: -1;
+  } 
+  /* 非表示用 */
+#menu-toggle { display: none; }
+
+/* ボタン（右端縦中央） */
+.menu-btn {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1002;
+  transition: background-color 0.3s ease;
+}
+
+/* 三本線 */
+.hamburger-line {
+  width: 100%;
+  height: 4px;
+  background: #3b5539;
+  transition: all 0.3s ease;
+}
+
+/* チェックONで×にアニメーション */
+#menu-toggle:checked + .menu-btn .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+#menu-toggle:checked + .menu-btn .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+#menu-toggle:checked + .menu-btn .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* チェックONで背景色変更 */
+#menu-toggle:checked + .menu-btn {
+  background: #ffffff;
+}
+
+/* サイドメニュー初期状態（隠す） */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 250px;
+  height: 100vh;
+  background: rgba(118,117,102,0.9);
+  box-shadow: -2px 0 6px rgba(0,0,0,0.5);
+  transition: right 0.5s ease;
+  z-index: 1001;
+}
+
+/* チェックONで表示 */
+#menu-toggle:checked ~ .side-menu {
+  right: 0;
+}
+
+/* メニュー項目スタイル */
+.side-menu ul {
+  list-style: none;
+  padding: 80px 20px;
+  margin: 0;
+}
+.side-menu li {
+  margin-bottom: 20px;
+}
+.side-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  transition: background 0.3s;
+}
+.side-menu a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* コンテンツ全体をスライド */
+.content-wrapper {
+  position: relative;
+  transition: transform 0.5s ease;
+}
+
+/* メニュー開時に少しスライド */
+#menu-toggle:checked ~ .content-wrapper {
+  transform: translateX(-200px);
+}
+
+
+/* 
+section {
+    padding: 3rem 1.5rem;
+    max-width: 960px;
+    margin: auto;
+} */
+
+
+/* ===============
+|     Header     |
+=================*/
+
+header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* ハンバーガー */
+.hamburger {
+    display: block;
+    cursor: pointer;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    z-index: 1000;        /*前面に出す  */ 
+    margin: 20px;
+    right: 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 6px 0;
+    z-index: 1000;        /*前面に出す  */ 
+    background: #bdbf92; /* 茶色 → 茶筅をイメージ */
+    border-radius: 3px;
+    transition: all 0.2s ease;
+} 
+
+.hamburger span :hover{
+    background: none;
+}
+/* ハンバーガーがONになった時に背景を白に */
+#menu-toggle:checked + .hamburger {
+    background-color: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* おまけ：線の色を変えるならこちらも */
+  #menu-toggle:checked + .hamburger span {
+    background-color: #333;
+  }
+.hamburger.active span {
+    background-color: #c49a6c;
+}
+/* チェックボックス非表示 */
+#menu-toggle {
+    display: none;
+}
+
+/* ハンバーガークリック時の変化（変形） */
+#menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(16px, 4px);
+}
+#menu-toggle:checked + .hamburger span:nth-child(2) {
+    transform: rotate(90deg);
+    translate: 3px;
+}
+#menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(0, -4px);
+}
+
+/* メニュー */
+.menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -250%;
+    width: 350px;
+    height: 100%;
+    background-color: black;
+    background: rgba(118, 117, 102, 0.736);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.7);
+    transition: right 0.6s ease;
+    z-index: 1000;
+    align-items: center;
+}
+
+.menu ul {
+    size: 0.1rem;
+    list-style: none;
+    padding: 100px 40px;
+    margin: 0;
+}
+
+.menu li {
+    margin: 30px 10px;
+    text-align: left;
+}
+
+.menu li :hover {
+    background-color: rgb(158, 201, 171);
+    transition: 0.2s;
+}
+
+.menu a {
+    display: block;
+    font-family: "Yu Mincho" "Hiragino Mincho ProN", serif;
+    text-decoration: none;
+    font-family: "Hiragino Mincho ProN", serif; /* 明朝体 */
+    color: #333;
+    font-size: 18px;
+    padding: 20px 40px;
+    border-bottom: 1px dashed #aaa;
+    text-decoration: none;
+}
+
+/* メニュー表示状態 */
+#menu-toggle:checked ~ .menu {
+    right: 0;
+    display: none;
+}
+
+/* ===============
+|      main      |
+=================*/
+
+/* hero */
+/* .hero {
+    width: 100%;
+    background-color: #3b5539;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    height: 60vh;
+} */
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+.slider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 65, 43, 0.4); /* 和風グリーンの半透明 */
+    z-index: 1;
+    pointer-events: none; /* スライドの操作を邪魔しない */
+}
+
+.slide img {
+    filter: brightness(0.85) saturate(0.8); /* 少し暗く＆色味を抑える */
+    transition: filter 0.5s ease;
+}
+
+.slide img {
+    filter: brightness(0.85) saturate(0.8); /* 少し暗く＆色味を抑える */
+    transition: filter 0.5s ease;
+}
+.slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    flex-shrink: 0; /*スライドはばが縮まらないよう*/
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.slide img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像を全体に拡大してトリミング */
+    display: block;
+    pointer-events: none;
+}
+
+/* スライドの矢印 */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s;
+}
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+  /* 左右20pxの位置に配置 */
+.arrow.left {
+    left: 20px;
+}
+.arrow.right {
+    right: 20px;
+}
+
+.caption {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    color: #fff;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
+  
+  @media (max-width: 768px) {
+    .caption {
+      font-size: 1.2rem;
+      bottom: 15%;
+      left: 5%;
+    }
+  }
+  
+
+.hero-title {
+    color: white;
+}
+
+#introduce {
+    width: 80%;
+    height: 60vh;
+    writing-mode: vertical-rl;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin: 40px 80px;
+    border-left: 5px solid #a0b798;
+    font-family: "Yu Mincho", "ヒラギノ明朝 ProN", serif;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center; /* 文章を中央寄せに */
+    overflow: hidden;
+    text-orientation: mixed;
+    line-height: 3;
+} 
+#introduce p {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.btn {
+    background-color: transparent;
+    border: 1px solid #333;
+    padding: 0.4em 1em;
+    margin-bottom: 0.8em;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    line-height: normal;
+  }
+  
+  .btn:hover {
+    background-color: #eee;
+    color: #3c8c3c; /* 抹茶風の緑色 */
+    border-color: #3c8c3c;
+  }
+
+
+.event {
+    background-color: #ffffff;
+    margin: 40px 80px 1.5rem 80px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid #a0b798;
+} 
+.article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.article {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 1px solid #ccc;
+    max-height: 200px;           /* 初期はタイトル分だけ見せる */
+    min-height: 80px;
+    overflow: hidden;
+    transition: max-height 0.5s ease, background-color 0.3s;
+    cursor: pointer; 
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin: 40px 80px;
+    border-left: 5px solid #a0b798
+}
+
+.article:hover {
+    max-height: 15rem;          /* 全文が見えるように展開 */
+    background: rgba(255, 255, 255, 0.95);
+}
+.step {
+    margin-bottom: 1rem;
+}
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #edeae0;
+    font-size: 0.9rem;
+}
+.btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #a0b798;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
